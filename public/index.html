@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <title>Filmlist App</title>
   </head>
-  
+
   <body>
     <div class="container" ng-controller="AppCtrl">
       <h1>Filmlist App</h1>
@@ -27,15 +27,18 @@
             <td><input class="form-control" ng-model="film.title"></td>
             <td><input class="form-control" ng-model="film.year"></td>
             <td><input class="form-control" ng-model="film.genre"></td>
-            <td><button class="btn btn-primary" ng-click="addFilm()">Add Film</button></td>
-            <td><button class="btn btn-info" ng-click="update()">Update</button>&nbsp;&nbsp;<button class="btn btn-info" ng-click="deselect()">Clear</button></td>
+            <td>
+                <button class="btn btn-primary" ng-show="filmedit" ng-click="update()">Update Film</button>
+                <button class="btn btn-primary" ng-show="!filmedit" ng-click="addFilm()">Add Film</button>
+            </td>
+            <td><button class="btn btn-info" ng-click="deselect()">Clear</button></td>
           </tr>
-          <tr ng-repeat="film in filmlist">
-            <td>{{film.title}}</td>
-            <td>{{film.year}}</td>
-            <td>{{film.genre}}</td>
-            <td><button class="btn btn-danger" ng-click="remove(film._id)">Delete</button></td>
-            <td><button class="btn btn-warning" ng-click="edit(film._id)">Edit</button></td>
+          <tr ng-repeat="lfilm in filmlist">
+            <td>{{lfilm.title}}</td>
+            <td>{{lfilm.year}}</td>
+            <td>{{lfilm.genre}}</td>
+            <td><button class="btn btn-danger" ng-click="remove(lfilm._id)">Delete</button></td>
+            <td><button class="btn btn-warning" ng-click="edit(lfilm._id);">Edit</button></td>
           </tr>
         </tbody>
       </table>
