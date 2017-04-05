@@ -1,0 +1,47 @@
+<!DOCTYPE>
+<html ng-app="myApp">
+  <head>
+    <!-- load bootstrap at the beginning -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <title>Filmlist App</title>
+  </head>
+  
+  <body>
+    <div class="container" ng-controller="AppCtrl">
+      <h1>Filmlist App</h1>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Jahr</th>
+            <th>Genre</th>
+            <th>Action</th>
+            <th>&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><input class="form-control" ng-model="film.title"></td>
+            <td><input class="form-control" ng-model="film.year"></td>
+            <td><input class="form-control" ng-model="film.genre"></td>
+            <td><button class="btn btn-primary" ng-click="addFilm()">Add Film</button></td>
+            <td><button class="btn btn-info" ng-click="update()">Update</button>&nbsp;&nbsp;<button class="btn btn-info" ng-click="deselect()">Clear</button></td>
+          </tr>
+          <tr ng-repeat="film in filmlist">
+            <td>{{film.title}}</td>
+            <td>{{film.year}}</td>
+            <td>{{film.genre}}</td>
+            <td><button class="btn btn-danger" ng-click="remove(film._id)">Delete</button></td>
+            <td><button class="btn btn-warning" ng-click="edit(film._id)">Edit</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- put script tag on bottom to help the app load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.min.js"></script>
+    <script src="controllers/controller.js"></script>
+  </body>
+</html>
