@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 var db = mongojs('filmlist', ['filmlist']);
 
 
-app.use(express.static(__dirname + '/public/src'));
+app.use(express.static(__dirname + '/public/release'));
 app.use(bodyParser.json());
 
 app.get('/filmlist/', function(req, res){
