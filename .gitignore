@@ -47,4 +47,18 @@ Temporary Items
 .apdisk
 
 
-/public/release/
+/public/release
+/public/src/release
+/public/bower_components
+/bower_components
+
+/public/node_modules
+/public/gulp.1
+/public/build
+/public/*.tmp
+/public/.tmp
+
+node_modules
+gulp.1
+build
+.tmp
