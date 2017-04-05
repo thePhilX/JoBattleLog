@@ -7,12 +7,12 @@ var bodyParser = require('body-parser');
 var db = mongojs('filmlist', ['filmlist']);
 
 
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/public/src'));
 app.use(bodyParser.json());
 
 app.get('/filmlist/', function(req, res){
   console.log("received GET")
-  
+
   db.filmlist.find(function(err, docs){
     res.json(docs);
   });
@@ -20,7 +20,7 @@ app.get('/filmlist/', function(req, res){
 });
 
 app.post('/filmlist/', function(req,res){
-  console.log("post success"); 
+  console.log("post success");
   db.filmlist.insert(req.body, function(err, doc){
     res.json(doc);
   });
