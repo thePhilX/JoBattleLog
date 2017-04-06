@@ -48,6 +48,7 @@ Temporary Items
 
 
 /public/release
+/public/dev_release
 /public/src/release
 /public/bower_components
 /bower_components
