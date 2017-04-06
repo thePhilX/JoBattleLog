@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('JohannasBadminton', [
+angular.module('BlurAdmin', [
   'ngAnimate',
   'ui.bootstrap',
   'ui.sortable',
@@ -12,6 +12,7 @@ angular.module('JohannasBadminton', [
   'ui.slimscroll',
   'ngJsTree',
   'angular-progress-button-styles',
+  '720kb.tooltips',
 
   'BlurAdmin.theme',
   'BlurAdmin.pages'

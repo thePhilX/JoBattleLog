@@ -1,3 +1,24 @@
 @import 'theme/conf/mixins';
-@import 'theme/conf/colorScheme/mint';
+@import 'theme/conf/colorScheme/blur';
 @import 'theme/conf/variables';
+
+
+// Buttons InsertBad
+  .badChoose {
+    padding: 0px !important;
+    text-align: center;
+  }
+  .badChoose div {
+    padding: 0px !important;
+  }
+  .badChoose h3 {
+    padding-top: 15px;
+  }
+  .badChoose p {
+    padding-top: 5px;
+    margin-bottom: 0px;
+  }
+
+#canvas-div tooltip, #satztooltip tooltip {
+  float: right !important;
+}

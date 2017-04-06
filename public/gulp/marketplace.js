@@ -15,7 +15,7 @@ gulp.task('marketplace-release', ['build', 'dev-release'], function () {
     }, function (res) {
       var nameAndVersion = 'blur-admin-' + res.version;
       return gulp
-        .src(['src/**', 'release/**', 'dev-release/**', 'gulp/**', 'bower.json', 'gulpfile.js', 'package.json', 'README.md', '.gitignore'], {base: "."})
+        .src(['/public/src/**', '/public/release/**', '/public/dev-release/**', '/public/gulp/**', 'bower.json', '/public/gulpfile.js', 'package.json', 'README.md', '/public/.gitignore', '.gitignore'], {base: "."})
         .pipe(rename(function (path) {
           path.dirname = nameAndVersion + '/' + path.dirname;
         }))

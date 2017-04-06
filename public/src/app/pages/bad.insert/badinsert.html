@@ -1,0 +1,118 @@
+<div class="widgets">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div ba-panel ba-panel-title="Form Wizard" ba-panel-class="with-scroll">
+                <ba-wizard>
+                    <ba-wizard-step title="Spieler" form="vm.playerinfosForm">
+                        <form>
+                            <div class="row">
+                                <div class="col-sm-9 col-lg-8">
+                                    <div class="form-group has-feedback"
+                                         ng-class="{'has-error': vm.playerinfosForm.player.$invalid && (vm.playerinfosForm.player.$dirty || vm.playerinfosForm.$submitted)}">
+                                        <label for="playeroneInput">Spieler</label>
+                                        <input type="text" class="form-control" id="playeroneInput" name="playerone" placeholder="Spieler" ng-model="vm.playerinfos.player" required>
+                                        <span class="help-block error-block basic-block">Bitte Spieler eingeben.</span>
+                                    </div>
+                                    <div class="form-group" ng-class="{'has-error': vm.playerinfosForm.opponent.$invalid && (vm.playerinfosForm.opponent.$dirty || vm.playerinfosForm.$submitted)}">
+                                        <label for="playertwoInput">Gegner</label>
+                                        <input type="text" class="form-control" id="playertwoInput" name="playertwo" placeholder="Gegner" ng-model="vm.playerinfos.opponent" required>
+                                        <span class="help-block error-block basic-block">Bitte Gegner eingeben</span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 col-lg-4">
+                                  <div class="uib-datepicker-wrap form-group" ng-class="{'has-error': vm.playerinfosForm.date.$invalid && (vm.playerinfosForm.date.$dirty || vm.playerinfosForm.$submitted)}">
+                                      <uib-datepicker ng-model="vm.playerinfos.date" datepicker-options="options"></uib-datepicker>
+                                  </div>
+                                </div>
+                            </div>
+                        </form>
+                    </ba-wizard-step>
+                    <ba-wizard-step title="Spiel" form="vm.gameinfosForm">
+                        <form novalidate> <!--name="vm.gameinfos" -->
+                          <div class="row">
+                            <div class="col-xs-12">
+                              <span class="upper-text bold-text ng-scope" style="padding-right: 20px"><b>{{vm.playerinfos.player | uppercase}} <i> vs </i> {{vm.playerinfos.opponent | uppercase}}</b></span>
+                            </div>
+                            <span class="light-text ng-scope">Satz: {{vm.currentgame.satz.number}} <i>  /  </i> Punktestand:  {{vm.currentgame.rounds.wins}}:{{vm.currentgame.rounds.number-vm.currentgame.rounds.wins}}<i>  /  </i> Satzstand: {{vm.currentgame.satz.wins}}:{{vm.currentgame.satz.number-vm.currentgame.satz.wins}}</span>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-8" id="canvas-div">
+                                <canvas ng-init="canvasDirectiveLoaded=true" id="canvas" style=" margin: 10px; width: 95%; background-color: rgba(0, 0, 0, 0.2); border: 5px solid; border-color: rgba(	32, 158, 145, 0.4); float: left" ng-click="vm.updateCanvas($event);"></canvas>
+                                {{vm.canvasDirectiveLoaded=true;""}}
+                                <button type="button" style="float: right !important;" class="btn btn-default btn-icon" ng-click="vm.endSchlag()" ng-disabled="vm.checkField();" tooltips tooltip-template="Runde eingeben"><i class="ion-android-checkmark-circle"></i></button>
+                            </div>
+                            <div class="col-md-4"  id="satztooltip" class="progress-buttons-container text-center default-text" style="margin-top: 5px; paddin 0px;">
+                              <div ba-panel ba-panel-title="Gewonnen" ba-panel-class="xsmall-panel light-text badChoose" style="padding: 0">
+                                <div ><button ng-disabled="vm.checkField();" style="width: 100%; background-color: rgba(144, 185, 0, 0.5);" progress-button="progressFunction()" class="btn btn-success" ng-click="vm.endRound(true, 'SF')">Schlagfehler</button></div>
+                                <div ><button ng-disabled="vm.checkField();" style="width: 100%; background-color: rgba(144, 185, 0, 0.5);" progress-button="progressFunction()" class="btn btn-success" ng-click="vm.endRound(true, 'LF')">Lauffehler</button></div>
+                                <p>SF: xx <i> / </i> LF: xx</p>
+                              </div>
+                              <div ba-panel ba-panel-title="Verloren" ba-panel-class="xsmall-panel light-text badChoose" style="padding: 0">
+                                <div ><button ng-disabled="vm.checkField();" style="width: 100%; background-color: rgba(220,20,60,0.5);" progress-button="progressFunction()" class="btn btn-danger" ng-click="vm.endRound(false, 'SF')">Schlagfehler</button></div>
+                                <div ><button ng-disabled="vm.checkField();" style="width: 100%; background-color: rgba(220,20,60,0.5);" progress-button="progressFunction()" class="btn btn-danger" ng-click="vm.endRound(false, 'LF')">Lauffehler</button></div>
+                                <p>SF: xx <i> / </i> LF: xx</p>
+                              </div><button type="button" style="float: right;" class="btn btn-success btn-icon" ng-click="vm.endSatz(true)" ng-disabled="vm.currentgame.rounds.number==0" tooltips tooltip-template="Satz gewonnen"><i class="ion-android-checkmark-circle"></i></button>
+                              <button type="button" style="float: right;" class="btn btn-danger btn-icon" ng-click="vm.endSatz(false)" ng-disabled="vm.currentgame.rounds.number==0" tooltips tooltip-template="Satz verloren"><i class="ion-android-checkmark-circle"></i></button>
+                            </div>
+                          </div>
+                          <div class="row">
+
+                          </div>
+                        </form>
+                    </ba-wizard-step>
+                    <ba-wizard-step title="Summary"  >
+                      <!---->
+
+                      <div ba-panel
+                           ba-panel-class="tabs-panel xsmall-panel with-scroll">
+                           {{ vm.lid=1;""}}
+                        <uib-tabset class="tabs-left">
+                          <uib-tab ng-repeat="satz in vm.gameinfos.game" heading="Satz {{ vm.lid }}">
+                            {{ vm.lid = vm.lid+1;""}}
+                              <table class="table table-hover">
+                                <thead>
+                                <tr class="black-muted-bg">  <th>Runde</th><th>Schläge</th><th>Ergebnis</th><th></th></tr>
+                                </thead><tbody>
+                                <tr ng-repeat="runde in satz" class="no-top-border">
+                                  <td >{{runde[0].id}}</td>
+                                  <td>
+                                    <span ng-repeat="schlag in runde" style="margin-right: 5px">
+                                      <span  style="color:#90EE90">
+                                        {{schlag.player}}
+                                      </span> - <span  style="color:#F08080">
+                                        {{schlag.opponent}}
+                                      </span>
+                                      {{ vm.lwin = schlag.win;""}}
+                                      {{ vm.lreason = schlag.reason;""}}
+                                    </span>
+                                  </td>
+                                  <td>
+                                    <span ng-show="vm.lwin">Gewonnen</span>
+                                    <span ng-show="!vm.lwin">Verloren</span>
+                                  </td>
+                                  <td>
+                                    {{ vm.lreason }}
+                                  </td>
+                                </tr>
+                                </tbody>
+                              </table>
+                          </uib-tab>
+                        </uib-tabset>
+                      </div>
+
+                    </ba-wizard-step>
+                    <ba-wizard-step title="Finish">
+                        <form class="form-horizontal" name="vm.finishForm" novalidate>
+                            Daten abschicken: <br />
+                            <button type="button"  class="btn btn-success" ng-click="vm.submit()" >Absenden</button>
+                          <a  ui-sref="dashboard"> <button type="button"  class="btn btn-danger" >Schließen</button></a>
+
+                        </form>
+                    </ba-wizard-step>
+                </ba-wizard>
+            </div>
+        </div>
+    </div>
+
+</div>

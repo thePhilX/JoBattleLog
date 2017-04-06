@@ -7,8 +7,21 @@
 
   angular.module('BlurAdmin.pages', [
     'ui.router',
+    'BlurAdmin.pages.dashboard',
+    'BlurAdmin.pages.bad.insert',
+    'BlurAdmin.pages.bad.search',
+    'BlurAdmin.pages.bad.see',
+    /*,
+// @todo debug delete
+    'BlurAdmin.pages.ui',
+    'BlurAdmin.pages.components',
+    'BlurAdmin.pages.form',
+    'BlurAdmin.pages.tables',
+    'BlurAdmin.pages.charts',
+    'BlurAdmin.pages.maps',
+    'BlurAdmin.pages.profile',
 
-    'BlurAdmin.pages.dashboard'
+    'BlurAdmin.pages.ui',*/
   ])
       .config(routeConfig);
 
@@ -16,7 +29,28 @@
   function routeConfig($urlRouterProvider, baSidebarServiceProvider) {
     $urlRouterProvider.otherwise('/dashboard');
 
+    // @todo debug delete
     /*baSidebarServiceProvider.addStaticItem({
+      title: 'Pages',
+      icon: 'ion-document',
+      subMenu: [{
+        title: 'Sign In',
+        fixedHref: 'auth.html',
+        blank: true
+      }, {
+        title: 'Sign Up',
+        fixedHref: 'reg.html',
+        blank: true
+      }, {
+        title: 'User Profile',
+        stateRef: 'profile'
+      }, {
+        title: '404 Page',
+        fixedHref: '404.html',
+        blank: true
+      }]
+    });
+    baSidebarServiceProvider.addStaticItem({
       title: 'Menu Level 1',
       icon: 'ion-ios-more',
       subMenu: [{

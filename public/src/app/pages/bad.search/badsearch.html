@@ -1,0 +1,40 @@
+<div class="horizontal-scroll">
+  <table class="table" st-table="searchTable">
+    <thead>
+    <tr class="sortable ">
+      <th class="table-id" st-sort="id" st-sort-default="true">#</th>
+      <th st-sort="player">Name</th>
+      <th st-sort="opponent">Gegner</th>
+      <th st-sort="date">Datum</th>
+      <th st-sort="win">Ergebnis</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th><input st-search="player" placeholder="Suche Spieler" class="input-sm form-control search-input"
+                 type="search"/></th>
+      <th><input st-search="opponent" placeholder="Suche Gegner" class="input-sm form-control search-input"
+                 type="search"/></th>
+      <th><input st-search="date" placeholder="Suche Datum" class="input-sm form-control search-input"
+                 type="search"/></th>
+      <th><input st-search="win" placeholder="Suche Ergebnis" class="input-sm form-control search-input" type="search"/>
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="item in searchTable">
+      <td class="table-id">{{item.id}}</td>
+      <td>{{item.player}}</td>
+      <td>{{item.opponent}}</td>
+      <td>{{item.date}}</td>
+      <td>{{item.win}}</td>
+    </tr>
+    </tbody>
+    <tfoot>
+    <tr>
+      <td colspan="6" class="text-center">
+        <div st-pagination="" st-items-by-page="25" st-displayed-pages="5"></div>
+      </td>
+    </tr>
+    </tfoot>
+  </table>
+</div>
